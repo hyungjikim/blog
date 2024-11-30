@@ -1,10 +1,10 @@
-import * as fs from "fs";
-import * as path from "path";
-import prompts from "prompts";
-import "../envConfig.ts";
+import * as fs from 'fs';
+import * as path from 'path';
+import prompts from 'prompts';
+import '../envConfig.ts';
 
-const koFilePath = path.resolve(__dirname, "../translations/ko.json");
-const enFilePath = path.resolve(__dirname, "../translations/en.json");
+const koFilePath = path.resolve(__dirname, '../translations/ko.json');
+const enFilePath = path.resolve(__dirname, '../translations/en.json');
 
 /** Helper function to extract translations from parsed JSON data  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,14 +17,14 @@ const extractTranslations = (rows: any) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rows.forEach((row: any, index: number) => {
-    if (row.type === "tableRow" && Array.isArray(row.content)) {
+    if (row.type === 'tableRow' && Array.isArray(row.content)) {
       const cells = row.content;
 
       /** skip table head */
       if (index === 0) return;
 
-      const koText = cells[0]?.content?.[0]?.content?.[0]?.text || "";
-      const enText = cells[1]?.content?.[0]?.content?.[0]?.text || "";
+      const koText = cells[0]?.content?.[0]?.content?.[0]?.text || '';
+      const enText = cells[1]?.content?.[0]?.content?.[0]?.text || '';
 
       if (koText && enText) {
         translations[koText] = { ko: koText, en: enText };
@@ -46,21 +46,21 @@ const ensureDirectory = (filePath: string) => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const saveToFile = (filePath: string, data: any) => {
   ensureDirectory(filePath);
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), "utf8");
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
 };
 
 /** Fetch translation data */
 const processTranslations = async (email: string, token: string) => {
-  const API_URL = process.env.TRANSLATION_API_URL ?? "";
+  const API_URL = process.env.TRANSLATION_API_URL ?? '';
 
   try {
     const response = await fetch(API_URL, {
-      method: "GET",
+      method: 'GET',
       headers: {
         Authorization: `Basic ${Buffer.from(`${email}:${token}`).toString(
-          "base64"
+          'base64'
         )}`,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -88,28 +88,28 @@ const processTranslations = async (email: string, token: string) => {
     saveToFile(koFilePath, koTranslations);
     saveToFile(enFilePath, enTranslations);
 
-    console.log("Translations saved successfully!");
+    console.log('Translations saved successfully!');
   } catch (error) {
-    console.error("Error processing translations:", error);
+    console.error('Error processing translations:', error);
   }
 };
 
 const getCredentials = async () => {
   const response = await prompts([
     {
-      type: "text",
-      name: "email",
-      message: "Enter your email:",
+      type: 'text',
+      name: 'email',
+      message: 'Enter your email:',
     },
     {
-      type: "password",
-      name: "token",
-      message: "Enter your token:",
+      type: 'password',
+      name: 'token',
+      message: 'Enter your token:',
     },
   ]);
 
   if (!response.email || !response.token) {
-    console.error("Email and API token are required!");
+    console.error('Email and API token are required!');
     process.exit(1);
   }
 
