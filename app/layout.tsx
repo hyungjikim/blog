@@ -13,6 +13,12 @@ export const metadata: Metadata = {
     template: '%s | Hyungji Blog',
   },
   description: 'Happily Dev After',
+  verification: {
+    google: 'tG7FHMfv6ogz5e838LeM6QwEBZtiVFHQXaM1WoVnUqw',
+    other: {
+      'naver-site-verification': '797fbeef5a234d483e780f6de9ed393c4cb80d5e',
+    },
+  },
 };
 
 const jsonLd = {
