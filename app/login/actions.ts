@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/utils/supabase/server';
+import { Provider } from '@supabase/supabase-js';
 
 export async function login(formData: FormData) {
   const supabase = await createClient();
@@ -36,13 +37,32 @@ export async function signup(formData: FormData) {
     password: formData.get('password') as string,
   };
 
-  const { error, data: result } = await supabase.auth.signUp(data);
+  const { error } = await supabase.auth.signUp(data);
 
   if (error) {
     console.error(error);
     redirect('/error');
   }
-  console.log(result);
+
   revalidatePath('/', 'layout');
   redirect('/');
+}
+
+export async function socialLogin(provider: Provider) {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: process.env.NEXT_PUBLIC_OAUTH_REDIRECT_URL,
+    },
+  });
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (data.url) {
+    redirect(data.url); // use the redirect API for your server framework
+  }
 }
