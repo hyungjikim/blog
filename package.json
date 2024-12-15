@@ -7,11 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "predev": "rimraf .next",
+    "prebuild": "rimraf .next",
     "script:sync-translations": "npx tsx script/sync-translations.ts",
     "prepare": "husky"
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.1.0",
+    "@stylexjs/open-props": "^0.9.3",
+    "@stylexjs/stylex": "^0.9.3",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.7",
     "next": "15.1.0",
@@ -21,6 +25,10 @@
   },
   "devDependencies": {
     "@next/env": "^15.0.3",
+    "@stylexjs/eslint-plugin": "^0.9.3",
+    "@stylexswc/nextjs-plugin": "^0.5.0",
+    "@stylexswc/rs-compiler": "^0.5.0",
+    "@stylexswc/webpack-plugin": "^0.5.0",
     "@types/node": "^20",
     "@types/prompts": "^2.4.9",
     "@types/react": "^18",
@@ -32,6 +40,7 @@
     "lint-staged": "^15.2.10",
     "prettier": "3.4.1",
     "prompts": "^2.4.2",
+    "rimraf": "^6.0.1",
     "typescript": "^5"
   },
   "lint-staged": {

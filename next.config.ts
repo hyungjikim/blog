@@ -1,6 +1,7 @@
-import type { NextConfig } from 'next';
 import NextBundleAnalyzer from '@next/bundle-analyzer';
 import createNextIntlPlugin from 'next-intl/plugin';
+import stylexPlugin from '@stylexswc/nextjs-plugin';
+import path from 'path';
 
 const withBundleAnalyzer = NextBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -8,8 +9,20 @@ const withBundleAnalyzer = NextBundleAnalyzer({
 
 const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+const rootDir = __dirname;
 
-export default withBundleAnalyzer(withNextIntl(nextConfig));
+const withStylex = stylexPlugin({
+  rsOptions: {
+    aliases: {
+      '@/*': [path.join(rootDir, '*')],
+    },
+    unstable_moduleResolution: {
+      type: 'commonJS',
+      rootDir,
+    },
+  },
+});
+
+const nextConfig = {};
+
+export default withBundleAnalyzer(withNextIntl(withStylex(nextConfig)));
