@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^15.1.0",
+    "@stylexjs/stylex": "^0.9.3",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.7",
     "next": "15.1.0",
