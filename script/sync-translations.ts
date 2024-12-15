@@ -3,8 +3,8 @@ import * as path from 'path';
 import prompts from 'prompts';
 import '../envConfig.ts';
 
-const koFilePath = path.resolve(__dirname, '../translations/ko.json');
-const enFilePath = path.resolve(__dirname, '../translations/en.json');
+const koFilePath = path.resolve(__dirname, '../messages/ko.json');
+const enFilePath = path.resolve(__dirname, '../messages/en.json');
 
 /** Helper function to extract translations from parsed JSON data  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
