@@ -17,7 +17,7 @@ const withStylex = stylexPlugin({
       '@/*': [path.join(rootDir, '*')],
     },
     unstable_moduleResolution: {
-      type: 'ESM',
+      type: 'commonJS',
       rootDir,
     },
   },
