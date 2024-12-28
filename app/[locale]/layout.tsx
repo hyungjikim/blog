@@ -7,6 +7,7 @@ import { routing } from '../../i18n/routing';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { Analytics } from '@vercel/analytics/next';
+import Navigation from '../components/header/navigation/navigation';
 
 const notoSans = Noto_Sans({
   subsets: ['latin'],
@@ -58,14 +59,15 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <body className={`${notoSans.className}`}>
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <NextIntlClientProvider messages={messages}>
+          <Navigation />
           {children}
         </NextIntlClientProvider>
         <Analytics />
