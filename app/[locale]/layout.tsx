@@ -58,13 +58,13 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <Script
-        id="json-ld"
-        type="application/ld+json"
-        strategy="beforeInteractive"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <body className={`${notoSans.className}`}>
+        <Script
+          id="json-ld"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
