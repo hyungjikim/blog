@@ -1,5 +1,6 @@
 import stylex from '@stylexjs/stylex';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 const Navigation = () => {
   const t = useTranslations();
@@ -10,6 +11,9 @@ const Navigation = () => {
 
         <li {...stylex.props(style.commonLi)}>{t('블로그')}</li>
         <li {...stylex.props(style.commonLi)}>{t('소개')}</li>
+        <li {...stylex.props(style.commonLi)}>
+          <Link href="/login">{t('로그인')}</Link>
+        </li>
       </ul>
     </nav>
   );
@@ -22,15 +26,16 @@ const style = stylex.create({
     height: '60px',
   },
   ul: {
+    display: 'flex',
     listStyle: 'none',
     color: '#1a1a1a',
+    justifyContent: 'space-between',
   },
   commonLi: {
     padding: '16px',
     fontWeight: 700,
-    float: 'right',
   },
   leftLi: {
-    float: 'left',
+    marginRight: 'auto',
   },
 });
