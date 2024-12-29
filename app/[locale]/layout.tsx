@@ -68,7 +68,7 @@ export default async function RootLayout({
         />
         <NextIntlClientProvider messages={messages}>
           <Navigation />
-          {children}
+          <main>{children}</main>
         </NextIntlClientProvider>
         <Analytics />
       </body>
