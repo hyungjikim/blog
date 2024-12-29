@@ -23,17 +23,25 @@ export default Navigation;
 
 const style = stylex.create({
   nav: {
-    height: '60px',
+    containerName: 'header-navigation',
+    containerType: 'inline-size',
   },
   ul: {
     display: 'flex',
-    listStyle: 'none',
+    listStyleType: 'none',
     color: '#1a1a1a',
     justifyContent: 'space-between',
+    '@container header-navigation (max-width: 400px)': {
+      display: 'block',
+    },
   },
   commonLi: {
     padding: '16px',
     fontWeight: 700,
+
+    '@container header-navigation (max-width: 400px)': {
+      padding: '8px',
+    },
   },
   leftLi: {
     marginRight: 'auto',
